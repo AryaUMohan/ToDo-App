@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+{% load static%}
+{%block main_block%}
+
+
+<style>
+    body{
+        background-image: url('{% static "images/images.jpg" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #div1{
+        background-color: darkgoldenrod;
+        margin-top: 150px;
+        height:400px;
+        width:550px;
+    }
+
+   
+</style>
+
+
+<div class="container mt-5">
+    {% if messages %}
+    {% for m in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{m}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {%endfor%}
+    {%endif%}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 p-4 shadow border-2" id="div1">
+            <h1 class="text-center fw-bolder">SignIn</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form.as_p}}
+                <button type="submit">Login</buttton>
+
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+{%endblock%}

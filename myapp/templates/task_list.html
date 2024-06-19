@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color: #8BC6EC;
+            background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+        }
+
+        #div1{
+            background-color: burlywood;
+        }
+
+        h1{
+           color:brown;
+        }
+
+        #div2{
+            width: 700px;
+            height:50px;
+            
+        }
+       
+    </style>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>All Task List</h1></center>
+    <center><a href="{%url 'task-add' %}" class="btn btn-primary"> + Add Task</a></center>
+    <h2>Welcome  {{request.user}}</h2>
+    <a href="{%url 'signout' %}" class="btn btn-secondary">Logout</a>
+
+
+    {% if messages %}
+    {% for m in messages %}
+    <center><div class="alert alert-warning alert-dismissible fade show" role="alert" id="div2">
+       <strong>{{m}}</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div></center>
+    {%endfor%}
+    {%endif%}
+
+    <div class="container d-flex justify-content-center gap-4">
+        {%for item in status_sum%}
+           {%if item.status == 'complete'%}
+        <div class="border p-4 rounded alert alert-success">
+            <h3>Total {{item.status}} : {{item.status_count}}</h3>
+        </div>
+        {%else%}
+        <div class="border p-4 rounded alert alert-danger">
+            <h3>Total {{item.status}} : {{item.status_count}}</h3>
+        </div>
+        {%endif%}
+        {%endfor%}
+    </div>
+
+
+    <div class="container mt-5">
+        {%for t in data%}
+        <div class="row mb-2">
+            <div class="col-3"></div>
+            <div class="col-6 border rounded-pill p-3 shadow" id="div1">
+               <div class="d-flex  justify-content-around">
+                <div>{{t.title}}</div>
+                <div>{{t.status}}</div>
+                <div>{{t.user}}</div>
+                <div>
+                    <a href="{%url 'task-edit' t.id%}" class="btn btn-primary">Edit</a>
+                    <a href="{%url 'task-detail' t.id%}" class="btn btn-warning">View</a>
+                    <a href="{%url 'task-delete' t.id%}" class="btn btn-danger">Delete</a>
+                    
+                </div>
+               </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</body>
+</html>

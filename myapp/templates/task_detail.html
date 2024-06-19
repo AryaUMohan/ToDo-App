@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block main_block%}
+
+
+<style>
+  body{
+    background-image:url('{% static "images/images.jpg" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+  #div1{
+    width:700px;
+    height:150px;
+    margin-top: 50px;
+  }
+</style>
+
+
+
+<h1><center>Task Details</center></h1>
+    <div class="container d-flex justify-content-center" id="div1">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Title :{{data.title}}
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Status :{{data.status}}</li>
+             <li class="list-group-item">Date :{{data.created_date}}</li>
+             
+            </ul>
+          </div>
+    </div>
+
+{%endblock%}
